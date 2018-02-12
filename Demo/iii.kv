@@ -1,0 +1,337 @@
+#:kivy 1.10.0
+
+<Screen_manager>
+	Main_screen:
+	Lab_screen:	
+	Production_screen:
+	Lab_stock_input_screen:
+	Lab_orders_input_screen:	
+
+<Main_screen>:
+	name: 'main_screen'
+    BoxLayout:
+    	orientation: 'vertical'
+        Button:
+            text: 'Laboratory'
+            font_size: 50
+            on_press: root.manager.current = 'lab_screen'
+        Button:
+            text: 'Production'
+            font_size: 50
+            on_press: root.manager.current = 'production_screen'    
+        Button:
+            text: 'Quit'
+            font_size: 50
+            on_press: exit()
+            
+<Lab_screen>:
+	name: 'lab_screen'
+	id: lab_screen
+	BoxLayout:
+		Lab_operations_buttons:
+			id: lab_operations_buttons
+		Lab_tables_list:
+			id: lab_tables_list
+		
+<Production_screen>:
+	name: 'production_screen'
+    BoxLayout:
+    	orientation: 'vertical'
+        Button:
+            text: 'Production Stock'
+            font_size: 50
+            on_press: root.resetall()
+        Button:
+            text: 'Back to main menu'
+            font_size: 50
+            on_press: root.manager.current = 'main_screen'
+
+<Lab_operations_buttons>
+	BoxLayout:
+		orientation: 'vertical'
+	    Button:
+	        text: 'Input'
+	        font_size: 40
+	        on_press: root.input_press()
+	    Button:
+	        text: 'Edit'
+	        font_size: 40
+	        on_press: root.edit_press()
+	    Button:
+	        text: 'View'
+	        font_size: 40
+	        on_press: root.view_press()
+	    Button:
+	        text: 'Query'
+	        font_size: 40
+	        on_press: root.query_press()
+	    Button:
+	        text: 'Back to main menu'
+	        font_size: 40
+	        on_press: root.parent.parent.manager.current = 'main_screen'
+
+<Lab_tables_list>
+	BoxLayout:
+		orientation: 'vertical'
+		ToggleButton:
+			id: order_toggle
+			text: 'Orders'
+			group: 'lab'
+			state: 'down'
+		ToggleButton:
+			id: stock_toggle
+			text: 'Stock'
+			group: 'lab'	
+
+<Lab_orders_input_screen>:
+	name: 'lab_orders_input_screen'
+    BoxLayout:
+    	orientation: 'vertical'
+    	GridLayout:
+    		cols: 2
+    		rows: 12
+    		
+    		Label:
+    			text: 'Name:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: name_field
+    			multiline: False
+    			font_size: root.font_text_input
+    			group: 'non_toggle'
+    		Label:
+    			text: 'Catalouge Number:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: catalouge_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'CAS Number:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: cas_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Manufacturer:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: manufacturer_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Supplier:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: supplier_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Price:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		FloatInput:
+    			id: price_field
+    			multiline: False
+    			font_size: root.font_text_input
+    			text: self.default_value
+    			on_text_validate: self.check_float()
+    		Label:
+    			text: 'Unit Quantity:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: quantity_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Amount Ordered:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		FloatInput:
+    			id: ordered_field
+    			multiline: False
+    			font_size: root.font_text_input
+    			text: self.default_value
+    			on_text_validate: self.check_float()
+    		Label:
+    			text: 'End User:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: user_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Order Reference:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: reference_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Order Status:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		BoxLayout:
+    			ToggleButton:
+    				id: order_open_toggle
+    				text:'Open'
+    				state: 'down'
+    				group: 'toggle'
+    			ToggleButton:
+    				id: order_partial_toggle
+    				text:'Partial'
+    				group: 'toggle'
+    			ToggleButton:
+    				id: order_closed_toggle
+    				text: 'Closed'
+    				group: 'toggle'
+    		Label:
+    			text: 'Notes:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: notes_field
+    			multiline: False
+    			font_size: root.font_text_input    	
+        Button:
+            text: 'Input Order'
+            font_size: root.font_buttons
+            size_hint_y: root.y_hint_buttons
+            on_press: root.input_order_to_db()
+            
+        Button:
+        	text: 'Previous Page'
+        	font_size: root.font_buttons
+        	size_hint_y: root.y_hint_buttons
+        	on_press: root.manager.current = 'lab_screen'
+        Button:
+            text: 'Back to main menu'
+            font_size: root.font_buttons
+            size_hint_y: root.y_hint_buttons
+            on_press: root.manager.current = 'main_screen'
+  
+            
+<Lab_stock_input_screen>:
+	name: 'lab_stock_input_screen'
+    BoxLayout:
+    	orientation: 'vertical'
+    	GridLayout:
+    		cols: 2
+    		rows: 12
+    		
+    		Label:
+    			text: 'Name:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: name_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Catalouge Number:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: catalouge_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'CAS Number:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: cas_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Lot Number:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: lot_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Manufacturer:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: manufacturer_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Quantity:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: quantity_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Expiry:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: expiry_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Stock:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: stock_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Stock Limit:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: limit_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Location:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: location_field
+    			multiline: False
+    			font_size: root.font_text_input
+    		Label:
+    			text: 'Notes:'
+    			size_hint_x: root.x_hint_labels
+    			font_size: root.font_labels
+    		TextInput:
+    			id: notes_field
+    			multiline: False
+    			font_size: root.font_text_input    	
+        Button:
+            text: 'Input Stock'
+            font_size: root.font_buttons
+            size_hint_y: root.y_hint_buttons
+            #on_press: root.input_to_db("aa","bb")
+            
+        Button:
+        	text: 'Previous Page'
+        	font_size: root.font_buttons
+        	size_hint_y: root.y_hint_buttons
+        	on_press: root.manager.current = 'lab_screen'
+        Button:
+            text: 'Back to main menu'
+            font_size: root.font_buttons
+            size_hint_y: root.y_hint_buttons
+            on_press: root.manager.current = 'main_screen'
+          
+            
+    

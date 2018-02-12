@@ -1,0 +1,126 @@
+def config(filename='database.ini', section='postgresql') -> dict:
+    # create a parser
+    parser = ConfigParser()
+    # read config file
+    parser.read(filename)
+ 
+    # get section, default to postgresql
+    db = {}
+    if parser.has_section(section):
+        params = parser.items(section)
+        for param in params:
+            db[param[0]] = param[1]
+    else:
+        raise Exception('Section {0} not found in the {1} file'.format(section, filename))
+ 
+    return db
+
+def connect_to_database() -> psycopg2.connect():
+    conn = None
+    try:
+        # read connection parameters
+        params = config()
+ 
+        # connect to the PostgreSQL server
+        print('Connecting to the PostgreSQL database...')
+        conn = psycopg2.connect(**params)
+        return conn
+        
+    except (Exception, psycopg2.DatabaseError) as error:
+        print('error in db_methods.py-connect_to_database()-function')
+        print(error)
+        conn.close()
+        
+
+def get_cursor(cursor_connection : psycopg2.connect()) -> psycopg2.connect().cursor():
+    """ Connect to the PostgreSQL database server """
+    conn = None
+    try:
+        # read connection parameters
+        params = config()
+ 
+        # connect to the PostgreSQL server
+        print('Connecting to the PostgreSQL database...')
+        conn = psycopg2.connect(**params)
+ 
+        # create a cursor
+        cur = conn.cursor()
+        
+        # execute a statement
+        print('PostgreSQL database version:')
+        cur.execute('SELECT version()')
+ 
+        # display the PostgreSQL database server version
+        db_version = cur.fetchone()
+        print(db_version)
+       
+    # close the communication with the PostgreSQL
+        conn.close()
+        print('database cfose')
+        #return cur
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+        conn.close()
+    #finally:
+        #if conn is not None:
+            #conn.close()
+            #print('Database connection closed.')
+            
+def close_connection(conn):
+    try:
+        conn.close()
+        print('Database connection closed on first instance.')
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+        print('Database connection closed.')
+        
+lab_order_table:
+log
+notes
+item_id
+item_name
+catalogue_number
+cas_number
+manufacturer
+supplier
+price
+unit_quantity
+amount_ordered
+end_user
+order_reference
+order_status (open - partial - closed)
+
+lab_stock_table:
+log
+notes
+item_id
+item_name
+catalogue_number
+cas_number
+manufacturer
+supplier
+price
+unit_quantity
+stock
+expiry
+lot
+location
+invoice_number
+
+There are three keywords specific to Kv language:
+
+app: always refers to the instance of your application.
+root: refers to the base widget/template in the current rule
+self: always refer to the current widget
+
+
+query securitization
+data viewing
+input tabbing
+single instance check
+password securitization
+
+        
