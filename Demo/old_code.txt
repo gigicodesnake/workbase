@@ -117,10 +117,12 @@ root: refers to the base widget/template in the current rule
 self: always refer to the current widget
 
 
-query securitization
-data viewing
-input tabbing
-single instance check
+query securitization 1
+data viewing 1
+input tabbing to automatically move down on input
+single instance check to check that there is only one instance of the program running
 password securitization
-
+frontend backend
+copy or view in excel
+log generator
         

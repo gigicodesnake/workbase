@@ -7,7 +7,7 @@ from configparser import ConfigParser
 from pypika import Query, Table, Field
 import psycopg2
 import pandas as pd
- 
+import dfgui
  
 def config(filename='database.ini', section='postgresql') -> dict:
     # create a parser
@@ -80,7 +80,7 @@ def view_table (table_name, field_list):
                     q = Query.from_(table).select('*')
                     q = str(q)
                     df = pd.read_sql_query(q, conn)
-                    print(df)
+                    dfgui.show(df)
                 except (Exception, psycopg2.DatabaseError) as error:
                     print('error in db_methods.py-connect_to_database()-function')
                     print(error)
@@ -93,6 +93,7 @@ def view_table (table_name, field_list):
                     q = Query.from_(table).select(field_list)
                     q = str(q)
                     df = pd.read_sql_query(q, conn)
+                    dfgui.show(df)
                 except (Exception, psycopg2.DatabaseError) as error:
                     print('error in db_methods.py-connect_to_database()-function')
                     print(error)
