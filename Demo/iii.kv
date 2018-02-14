@@ -1,11 +1,37 @@
 #:kivy 1.10.0
 
 <Screen_manager>
+	Login_screen:
 	Main_screen:
 	Lab_screen:	
 	Production_screen:
 	Lab_stock_input_screen:
-	Lab_orders_input_screen:	
+	Lab_orders_input_screen:
+	
+<Login_screen>:
+	name: 'login_screen'
+	BoxLayout:
+		orientation: 'vertical'
+		Label:
+			text: 'Please enter your username in the first field and password in the second.'
+		BoxLayout:
+			orientation: 'vertical'
+			size_hint_y: 0.4
+			TextInput:
+    			id: name_input
+    			multiline: False
+    			write_tab: False
+    			font_size: 38
+		
+    		TextInput:
+    			id: pass_input
+    			multiline: False
+    			password: True
+    			font_size: 38
+    		Button:
+    			text: 'Login'
+    			on_press: root.try_to_log()
+    			
 
 <Main_screen>:
 	name: 'main_screen'
@@ -95,7 +121,7 @@
     			text: 'Name:'
     			size_hint_x: root.x_hint_labels
     			font_size: root.font_labels
-    		TextInput:
+    		TextField:
     			id: name_field
     			multiline: False
     			font_size: root.font_text_input
@@ -104,7 +130,7 @@
     			text: 'Catalouge Number:'
     			size_hint_x: root.x_hint_labels
     			font_size: root.font_labels
-    		TextInput:
+    		TextField:
     			id: catalouge_field
     			multiline: False
     			font_size: root.font_text_input
@@ -112,7 +138,7 @@
     			text: 'CAS Number:'
     			size_hint_x: root.x_hint_labels
     			font_size: root.font_labels
-    		TextInput:
+    		TextField:
     			id: cas_field
     			multiline: False
     			font_size: root.font_text_input
@@ -120,7 +146,7 @@
     			text: 'Manufacturer:'
     			size_hint_x: root.x_hint_labels
     			font_size: root.font_labels
-    		TextInput:
+    		TextField:
     			id: manufacturer_field
     			multiline: False
     			font_size: root.font_text_input
@@ -128,7 +154,7 @@
     			text: 'Supplier:'
     			size_hint_x: root.x_hint_labels
     			font_size: root.font_labels
-    		TextInput:
+    		TextField:
     			id: supplier_field
     			multiline: False
     			font_size: root.font_text_input
@@ -146,7 +172,7 @@
     			text: 'Unit Quantity:'
     			size_hint_x: root.x_hint_labels
     			font_size: root.font_labels
-    		TextInput:
+    		TextField:
     			id: quantity_field
     			multiline: False
     			font_size: root.font_text_input
@@ -164,7 +190,7 @@
     			text: 'End User:'
     			size_hint_x: root.x_hint_labels
     			font_size: root.font_labels
-    		TextInput:
+    		TextField:
     			id: user_field
     			multiline: False
     			font_size: root.font_text_input
@@ -172,7 +198,7 @@
     			text: 'Order Reference:'
     			size_hint_x: root.x_hint_labels
     			font_size: root.font_labels
-    		TextInput:
+    		TextField:
     			id: reference_field
     			multiline: False
     			font_size: root.font_text_input
@@ -198,7 +224,7 @@
     			text: 'Notes:'
     			size_hint_x: root.x_hint_labels
     			font_size: root.font_labels
-    		TextInput:
+    		TextField:
     			id: notes_field
     			multiline: False
     			font_size: root.font_text_input    	
@@ -207,6 +233,7 @@
             font_size: root.font_buttons
             size_hint_y: root.y_hint_buttons
             on_press: root.input_order_to_db()
+            
             
         Button:
         	text: 'Previous Page'

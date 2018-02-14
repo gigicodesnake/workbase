@@ -117,12 +117,17 @@ root: refers to the base widget/template in the current rule
 self: always refer to the current widget
 
 
+http://dustwell.com/how-to-handle-passwords-bcrypt.html
+
+create authentication server
+
 query securitization 1
 data viewing 1
-input tabbing to automatically move down on input
+input tabbing to automatically move down on input 1
 single instance check to check that there is only one instance of the program running
 password securitization
 frontend backend
 copy or view in excel
 log generator
+import from order to stock
         
